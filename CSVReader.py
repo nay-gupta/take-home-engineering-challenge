@@ -26,9 +26,10 @@ class TruckReader:
     idsByBlock = {} # 2. By Block number
     idsByLocation = {} # 3. By LocationID
 
+    line = 0
+
     with open(self.filename, newline='') as csvfile:
       reader = csv.reader(csvfile, delimiter=',', )
-      line = 0
       for row in reader:
 
         # Based on headers
@@ -57,6 +58,7 @@ class TruckReader:
 
         line += 1
 
-    # Also return the line number to get the count of trucks + 1
+    line -= 1
+    # Also return the line number to get the count of trucks
     return [trucksByLine, idsByBlock, idsByLocation, line]
     
