@@ -6,7 +6,7 @@ class FoodTrucks:
     self.trucksByLine, self.idsByBlock, self.idsByLocation, self.count = csvReader.csvToTruckDicts()
     self.count -= 1
 
-  def getTrucksByBlock(self, block) -> List:
+  def getTrucksByBlock(self, block) -> list:
     if block in self.idsByBlock:
       truckIds = self.idsByBlock
       trucks = []
