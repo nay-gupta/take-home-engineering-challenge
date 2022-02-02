@@ -5,7 +5,7 @@ from FoodTrucks import FoodTrucks
 
 app = Flask(__name__)
 
-foodTrucks = FoodTrucks(TruckReader('/home/lilnaynay22/take-home-engineering-challenge/Mobile_Food_Facility_Permit.csv'))
+foodTrucks = FoodTrucks(TruckReader('../Mobile_Food_Facility_Permit.csv'))
 
 @app.route("/location/<locationid>", methods=['GET'])
 def getLocation(locationid):
