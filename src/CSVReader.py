@@ -31,34 +31,39 @@ class TruckReader:
     with open(self.filename, newline='') as csvfile:
       reader = csv.reader(csvfile, delimiter=',', )
       for row in reader:
-
         # Based on headers
         location = row[0]
         block = row[7]
 
         # First row contains only the headers
-        if line != 0: 
+        if line == 0:
+          keys = row
+        
+        else:
+          truck = {}
+          for i, key in enumerate(keys):
+            truck[key] = row[i]
 
           # 1. The number of trucks inserted
-          trucksByLine[line] = row 
+          trucksByLine[line - 1] = truck
 
           # 2. By Block number
           # One block can have multiple food trucks
           if block in idsByBlock:
-            idsByBlock[block].append(line)
+            idsByBlock[block].append(line - 1)
           else:
-            idsByBlock[block] = [line]
+            idsByBlock[block] = [line - 1]
 
           # 3. By LocationID
           # One Location can have multiple food trucks
           if location in idsByLocation:
-            idsByLocation[location].append(line)
+            idsByLocation[location].append(line - 1)
           else:
-           idsByLocation[location] = [line]
+           idsByLocation[location] = [line - 1]
+        
 
         line += 1
 
-    line -= 1
     # Also return the line number to get the count of trucks
-    return [trucksByLine, idsByBlock, idsByLocation, line]
+    return [trucksByLine, idsByBlock, idsByLocation, line - 1]
     
