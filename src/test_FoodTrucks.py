@@ -21,22 +21,20 @@ class TestFoodTrucks(unittest.TestCase):
     print("Success")
 
   def test_addTruck(self):
-    failedText = "Need block id, location id, and Applicant"
-    successText = "Successfully added truck"
 
     print("Adding invalid trucks (no block, no locationid, no Applicant")
     truckToAdd = {
       'locationid': '9999'
     }
-    self.assertEqual(failedText, self.foodTrucks.addTruck(truckToAdd))
+    self.assertEqual(False, self.foodTrucks.addTruck(truckToAdd)[1])
     truckToAdd = {
       'block': '9999'
     }
-    self.assertEqual(failedText, self.foodTrucks.addTruck(truckToAdd))
+    self.assertEqual(False, self.foodTrucks.addTruck(truckToAdd)[1])
     truckToAdd = {
       'Applicant': '9999'
     }
-    self.assertEqual(failedText, self.foodTrucks.addTruck(truckToAdd))
+    self.assertEqual(False, self.foodTrucks.addTruck(truckToAdd)[1])
     print("Success")
 
     print("Adding valid truck")
@@ -45,7 +43,7 @@ class TestFoodTrucks(unittest.TestCase):
       'block': '9999',
       'Applicant': "Nayan's Food Truck"
     }
-    self.assertEqual(successText, self.foodTrucks.addTruck(truckToAdd))
+    self.assertEqual(True, self.foodTrucks.addTruck(truckToAdd)[1])
     self.assertEqual(self.foodTrucks.count, 11)
     print("Success")
 
