@@ -4,6 +4,22 @@ Commercial Software Engineering is a very practical team at Microsoft and this e
 
 So instead of coding at a whiteboard with someone watching over your shoulder under high pressure, which is not a thing we often do, we instead discuss code that you have written previously when we meet.
 
+## My Solution
+
+My solution parses the data from the given csv file, and creates a dictionary from it. Each line number is the key, and the values are the flatted truck data allocated by property (csv column).
+
+There are two more dictionaries included. One represents all of the unique locaionid's acting as keys and the list of truck id's as the value. The other is the same, but for block id's. This ensures that the trucks are essentially indexed based on location and block. This makes getting and adding trucks an easy O(1) computation, causing read and writes to be fast on the backend. All of this functionality is included in CSVReader.py and FoodTrucks.py
+
+The REST API in app.py is as simple as dedicating three routes that a client can hit.
+
+1. [GET /location/[locationid]] Getting all trucks by locationid
+2. [GET block/[block]] Getting all trucks by block
+3. [POST] Adding a new truck from user request data (which much have locationid, block, and Applicant properties)
+
+This API allows us to use the backend functions already created in FoodTrucks.py to get and add trucks.
+
+Sample test cases are also included to test the reading from the csv file as well as getting and adding new trucks from/to the in memory dictionaries. The test cases use sample data, which is a slightly modified version of the first 10 trucks in the main csv file. The data was modified in a way that not all locationid's and blocks are unique. This was done to test getting multiple trucks from one locationid or block.
+
 ## Guidelines
 
 - This is meant to be an assignment that you spend approximately three hours of dedicated, focused work. Do not feel like you need to overengineer the solution with dozens of hours to impress us. Be biased toward quality over quantity, simplicity over complexity.
